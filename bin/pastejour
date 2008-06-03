@@ -10,7 +10,6 @@ if $stdin.tty?
   $stdout.write(Pastejour.get(name))
   $stdout.flush
 else
-  name = "paste" if name.nil? || name.empty?
   name = [ENV["USER"], name].compact.join("-")
   Pastejour.serve(name, $stdin.read)
 end

@@ -16,12 +16,10 @@ module Pastejour
   def self.find(name, first=true)
     hosts = Set.new
 
-    name = /^#{name}$/ unless Regexp == name
-
     waiting = Thread.current
 
     service = DNSSD.browse(SERVICE) do |reply|
-      if name.match(reply.name)
+      if name === reply.name
         DNSSD.resolve(reply.name, reply.type, reply.domain) do |rr|
           hosts << Paste.new(reply.name, rr.target, rr.port)
           waiting.run if first
