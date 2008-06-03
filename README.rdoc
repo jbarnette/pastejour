@@ -4,15 +4,35 @@ Broadcast standard out.
 
 == Installation
 
-  sudo gem install pastejour
+  sudo gem install jbarnette-pastejour --source=http://gems.github.com
   
 == Usage
 
-  git diff | pastejour
+  alice$ git diff | pastejour
+  bob$ pastejour alice | cat
+  
+  alice$ git diff | pastejour bob
+  bob$ pastejour | cat
+  
+  alice$ git diff | pastejour monkeys
+  bob$ pastejour alice-monkeys | cat
+  
+== ORLY?
+
+Yup. Pastejour gives you a simple, discoverable pipe for standard in and
+out. By default, Pastejour will only stay up until the first person
+grabs your paste. If you want to let a bunch of people grab the same
+thing, shoot it out in multiple mode:
+
+  alice$ git diff | pastejour -m # keeps on serving 'til you CTRL-C
+  
+== Awesome!
+
+You know it.
 
 == License
 
-Copyright (c) 2007 John Barnette
+Copyright (c) 2008 John Barnette, Evan Phoenix
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
