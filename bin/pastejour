@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require "rubygems"
+require "pastejour"
+
+name = ARGV.shift
+
+if $stdin.tty?
+  name = /#{ENV["USER"]}$/ if name.nil? || name.empty?
+  $stdout.write(Pastejour.get(name))
+  $stdout.flush
+else
+  name = "paste" if name.nil? || name.empty?
+  name = [ENV["USER"], name].compact.join("-")
+  Pastejour.serve(name, $stdin.read)
+end

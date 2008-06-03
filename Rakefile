@@ -20,8 +20,7 @@ pastejour_gemspec = Gem::Specification.new do |s|
   s.autorequire      = "pastejour"
   s.files            = %w(README.rdoc Rakefile) + Dir.glob("{lib,spec}/**/*")
   
-  # Uncomment this to add a dependency
-  # s.add_dependency "foo"
+  s.add_dependency "dnssd", ">= 0.6.0"
 end
 
 Rake::GemPackageTask.new(pastejour_gemspec) do |pkg|
