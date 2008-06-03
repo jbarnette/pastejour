@@ -1,40 +1,75 @@
 require "dnssd"
 require "socket"
 require "webrick"
-
+require "set"
 require "pastejour/version"
+
+Thread.abort_on_exception = true
 
 module Pastejour
   include Socket::Constants
 
-  Paste   = Struct.new(:name, :host)
+  Paste   = Struct.new(:name, :host, :port)
   PORT    = 42424
   SERVICE = "_pastejour._tcp"
 
-  def self.get(name)
-    waiting = Thread.new { sleep 5 }
-    contents = nil
+  def self.find(name, first=true)
+    hosts = Set.new
+
+    name = /^#{name}$/ unless Regexp == name
+
+    waiting = Thread.current
 
     service = DNSSD.browse(SERVICE) do |reply|
-      # FIXME: fuck you, DNSSD.resolve. fuck you up your stupid ass.
-      DNSSD.resolve(reply.name, reply.type, reply.domain) { raise "FOO!" }
+      if name.match(reply.name)
+        DNSSD.resolve(reply.name, reply.type, reply.domain) do |rr|
+          hosts << Paste.new(reply.name, rr.target, rr.port)
+          waiting.run if first
+        end
+      end
     end
 
-    waiting.join
+    sleep 5
     service.stop
 
+    hosts
+  end
+
+  def self.get(name)
+    hosts = find(name)
+
+    if hosts.empty?
+      STDERR.puts "ERROR: Unable to find #{name}"
+    elsif hosts.size > 1
+      STDERR.puts "ERROR: Multiple possibles found:"
+      hosts.each do |host|
+        STDERR.puts "  #{host.name} (#{host.host}:#{host.port})"
+      end
+    else
+      # Set is weird. There is no #[] or #at
+      hosts.each do |host|
+        STDERR.puts "(#{host.name} from #{host.host}:#{host.port})"
+        sock = TCPSocket.open host.host, host.port
+        return sock.read
+      end
+    end
+    
     # FIXME: actually read the paste contents
     # TCPSocket.open("localhost", PORT).read
-
-    contents
   end
 
   def self.serve(name, contents)
-    DNSSD.register(name, SERVICE, "local", PORT) do |reply|
+    tr = DNSSD::TextRecord.new
+    tr['description'] = File.read("#{path}/.git/description") rescue "a git project"
+    
+    DNSSD.register(name, SERVICE, "local", PORT, tr.encode) do |reply|
       puts "Pasting #{name}..."
     end
 
-    server = WEBrick::GenericServer.new(:Port => PORT)
+    log = WEBrick::Log.new(true) # true fools it
+    def log.log(*anything); end # send it to the abyss
+
+    server = WEBrick::GenericServer.new(:Port => PORT, :Logger => log)
 
     trap "INT" do
       server.shutdown
