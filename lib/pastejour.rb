@@ -1,0 +1,1 @@
+require "pastejour/version"
