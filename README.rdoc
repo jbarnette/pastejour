@@ -4,7 +4,7 @@ Broadcast standard out.
 
 == Installation
 
-  sudo gem install basis
+  sudo gem install pastejour
   
 == Usage
 
