@@ -1,7 +1,8 @@
 require "dnssd"
+require "set"
 require "socket"
 require "webrick"
-require "set"
+
 require "pastejour/version"
 
 Thread.abort_on_exception = true
@@ -55,7 +56,7 @@ module Pastejour
 
   def self.serve(name, multiple, contents)
     tr = DNSSD::TextRecord.new
-    tr['description'] = File.read("#{path}/.git/description") rescue "a git project"
+    tr["description"] = "A paste."
     
     DNSSD.register(name, SERVICE, "local", PORT, tr.encode) do |reply|
       puts "Pasting #{name}..."
@@ -66,9 +67,11 @@ module Pastejour
 
     server = WEBrick::GenericServer.new(:Port => PORT, :Logger => log)
 
-    trap "INT" do
-      server.shutdown
-      exit!
+    %w(INT TERM).each do |signal|
+      trap signal do
+        server.shutdown
+        exit!
+      end
     end
 
     server.start do |socket|
