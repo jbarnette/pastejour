@@ -1,6 +1,6 @@
 = Pastejour
 
-Broadcast standard out.
+Broadcast standard out using Bonjour.
 
 == Installation
 
