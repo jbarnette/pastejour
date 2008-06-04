@@ -14,12 +14,13 @@ pastejour_gemspec = Gem::Specification.new do |s|
   s.extra_rdoc_files = ["README.rdoc"]
   s.summary          = "Broadcast standard out."
   s.description      = s.summary
-  s.author           = ["John Barnette", "Evan Phoenix"]
+  s.authors          = ["John Barnette", "Evan Phoenix"]
   s.email            = "jbarnette@rubyforge.org"
   s.homepage         = "http://github.com/jbarnette/pastejour"
   s.require_path     = "lib"
   s.autorequire      = "pastejour"
-  s.files            = %w(README.rdoc Rakefile) + Dir.glob("{lib,spec}/**/*")
+  s.files            = %w(README.rdoc Rakefile) + Dir.glob("{bin,lib,spec}/**/*")
+  s.executables      = %w(pastejour)
   
   s.add_dependency "dnssd", ">= 0.6.0"
 end
