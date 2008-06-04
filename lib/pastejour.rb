@@ -51,9 +51,6 @@ module Pastejour
         return sock.read
       end
     end
-    
-    # FIXME: actually read the paste contents
-    # TCPSocket.open("localhost", PORT).read
   end
 
   def self.serve(name, multiple, contents)
