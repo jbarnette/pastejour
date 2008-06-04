@@ -4,6 +4,7 @@ require "rubygems"
 require "pastejour"
 
 multiple = ARGV.delete("-m")
+teeing = ARGV.delete("-t") || false
 name = ARGV.shift
 
 if $stdin.tty?
@@ -12,5 +13,7 @@ if $stdin.tty?
   $stdout.flush
 else
   name = [ENV["USER"], name].compact.join("-")
-  Pastejour.serve(name, multiple, $stdin.read)
+  contents = $stdin.read
+  Pastejour.serve(name, multiple, contents)
+  puts contents if teeing
 end

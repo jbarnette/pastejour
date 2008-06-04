@@ -59,7 +59,7 @@ module Pastejour
     tr["description"] = "A paste."
     
     DNSSD.register(name, SERVICE, "local", PORT, tr.encode) do |reply|
-      puts "Pasting #{name}..."
+      STDERR.puts "Pasting #{name}..."
     end
 
     log = WEBrick::Log.new(true) # true fools it
