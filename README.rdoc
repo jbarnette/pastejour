@@ -4,6 +4,7 @@ Broadcast standard out.
 
 == Installation
 
+  sudo gem install dnssd
   sudo gem install jbarnette-pastejour --source=http://gems.github.com
   
 == Usage

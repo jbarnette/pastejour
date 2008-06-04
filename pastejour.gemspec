@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{pastejour}
-  s.version = "1.0.2"
+  s.version = "1.0.3"
 
   s.specification_version = 2 if s.respond_to? :specification_version=
 
