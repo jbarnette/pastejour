@@ -1,3 +1,4 @@
+require "date"
 require "fileutils"
 require "rubygems"
 require "rake/gempackagetask"
@@ -13,7 +14,7 @@ pastejour_gemspec = Gem::Specification.new do |s|
   s.extra_rdoc_files = ["README.rdoc"]
   s.summary          = "Broadcast standard out."
   s.description      = s.summary
-  s.author           = "John Barnette"
+  s.author           = ["John Barnette", "Evan Phoenix"]
   s.email            = "jbarnette@rubyforge.org"
   s.homepage         = "http://github.com/jbarnette/pastejour"
   s.require_path     = "lib"

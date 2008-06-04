@@ -56,7 +56,7 @@ module Pastejour
     # TCPSocket.open("localhost", PORT).read
   end
 
-  def self.serve(name, contents)
+  def self.serve(name, multiple, contents)
     tr = DNSSD::TextRecord.new
     tr['description'] = File.read("#{path}/.git/description") rescue "a git project"
     
@@ -76,7 +76,7 @@ module Pastejour
 
     server.start do |socket|
       socket.print(contents)
-      server.shutdown
+      server.shutdown unless multiple
     end
   end
 end
