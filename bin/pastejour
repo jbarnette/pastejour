@@ -4,10 +4,13 @@ require "rubygems"
 require "pastejour"
 
 multiple = ARGV.delete("-m")
+find = ARGV.delete("-f")
 teeing = ARGV.delete("-t") || false
 name = ARGV.shift
 
-if $stdin.tty?
+if find
+  Pastejour.list
+elsif $stdin.tty?
   name = /#{ENV["USER"]}$/ if name.nil? || name.empty?
   $stdout.write(Pastejour.get(name))
   $stdout.flush

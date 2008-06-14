@@ -18,6 +18,13 @@ Broadcast standard out using Bonjour.
   alice$ git diff | pastejour monkeys
   bob$ pastejour alice-monkeys | cat
   
+  alice$ git diff | pastejour monkeys
+  bob$ pastejour -f
+  Searching for servers (3 seconds)
+  alice-monkeys
+  
+
+  
 == ORLY?
 
 Yup. Pastejour gives you a simple, discoverable pipe for standard in and

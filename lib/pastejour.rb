@@ -14,6 +14,22 @@ module Pastejour
   PORT    = 42424
   SERVICE = "_pastejour._tcp"
 
+  def self.list
+    servers = {}
+    service = DNSSD.browse(SERVICE) do |reply|
+      servers[reply.name] ||= reply
+    end
+    STDERR.puts "Searching for servers (3 seconds)"
+    # Wait for something to happen
+    sleep 3
+    service.stop
+    servers.each { |string,obj| 
+      name, port = string.split ":" 
+      STDERR.puts "Found pastejour at '#{name}'"
+    }
+  end
+  
+
   def self.find(name, first=true)
     hosts = Set.new
 
