@@ -23,7 +23,9 @@ Broadcast standard out using Bonjour.
   Searching for servers (3 seconds)
   alice-monkeys
   
-
+  # Copy the clipboard contents from one machine to another
+  alice$ pbpaste | pastejour
+  bob$ pastejour | pbcopy
   
 == ORLY?
 
