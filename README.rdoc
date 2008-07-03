@@ -10,13 +10,13 @@ Broadcast standard out using Bonjour.
 == Usage
 
   alice$ git diff | pastejour
-  bob$ pastejour alice | cat
+  bob$ pastejour alice
   
   alice$ git diff | pastejour bob
-  bob$ pastejour | cat
+  bob$ pastejour
   
   alice$ git diff | pastejour monkeys
-  bob$ pastejour alice-monkeys | cat
+  bob$ pastejour alice-monkeys
   
   alice$ git diff | pastejour monkeys
   bob$ pastejour -f
