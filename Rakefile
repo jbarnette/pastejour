@@ -30,12 +30,10 @@ Rake::GemPackageTask.new(pastejour_gemspec) do |pkg|
 end
 
 namespace :gem do
-  namespace :spec do
-    desc "Update pastejour.gemspec"
-    task :generate do
-      File.open("pastejour.gemspec", "w") do |f|
-        f.puts(pastejour_gemspec.to_ruby)
-      end
+  desc "Update pastejour.gemspec"
+  task :spec do
+    File.open("pastejour.gemspec", "w") do |f|
+      f.puts(pastejour_gemspec.to_ruby)
     end
   end
 end
