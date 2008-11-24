@@ -24,7 +24,7 @@ Broadcast standard out using Bonjour.
   alice-monkeys
   
   # Copy the clipboard contents from one machine to another
-  alice$ pbpaste | pastejour
+  alice$ pbpaste | pastejour bob
   bob$ pastejour | pbcopy
   
 == ORLY?

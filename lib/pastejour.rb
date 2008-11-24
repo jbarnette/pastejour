@@ -1,3 +1,4 @@
+require "rubygems"
 require "dnssd"
 require "set"
 require "socket"
