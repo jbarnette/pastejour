@@ -4,8 +4,6 @@ require "set"
 require "socket"
 require "webrick"
 
-require "pastejour/version"
-
 Thread.abort_on_exception = true
 
 module Pastejour
@@ -29,7 +27,6 @@ module Pastejour
       STDERR.puts "Found pastejour at '#{name}'"
     }
   end
-  
 
   def self.find(name, first=true)
     hosts = Set.new
