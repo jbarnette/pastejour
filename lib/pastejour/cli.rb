@@ -39,9 +39,11 @@ module Pastejour
         end
 
         opts.separator ""
-
         opts.parse! args
+
         @name = args.shift
+
+        yield self if @run && block_given?
       end
     end
 
@@ -51,10 +53,6 @@ module Pastejour
 
     def multiple?
       @multiple
-    end
-
-    def run?
-      @run
     end
 
     def tee?

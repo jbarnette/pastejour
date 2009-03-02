@@ -2,19 +2,17 @@
 
 require "pastejour/cli"
 
-opts = Pastejour::Cli.new STDOUT, ARGV
-
-if opts.run?
-  if opts.list?
+Pastejour::Cli.new STDOUT, ARGV do |cli|
+  if cli.list?
     Pastejour.list
   elsif $stdin.tty?
-    name = /#{ENV["USER"]}$/ if opts.name.nil? || opts.name.empty?
+    name = /#{ENV["USER"]}$/ if cli.name.nil? || cli.name.empty?
     $stdout.write Pastejour.get(name)
     $stdout.flush
   else
-    name = [ENV["USER"], opts.name].compact.join "-"
+    name = [ENV["USER"], cli.name].compact.join "-"
     contents = $stdin.read
-    Pastejour.serve name, opts.multiple?, contents
-    $stdout.puts contents if opts.tee?
+    Pastejour.serve name, cli.multiple?, contents
+    $stdout.puts contents if cli.tee?
   end
 end
