@@ -1,18 +1,14 @@
 require "rubygems"
 require "hoe"
 
-require "./lib/pastejour/version.rb"
+Hoe.spec "pastejour" do
+  developer "John Barnette", "jbarnette@rubyforge.org"
+  developer "Evan Phoenix",  "evan@fallingsnow.net"
 
-Hoe.new "pastejour", Pastejour::VERSION do |p|
-  p.developer "John Barnette", "jbarnette@rubyforge.org"
+  self.extra_rdoc_files = FileList["*.rdoc"]
+  self.history_file     = "CHANGELOG.rdoc"
+  self.readme_file      = "README.rdoc"
+  self.testlib          = :minitest
 
-  p.url              = "http://github.com/jbarnette/pastejour"
-  p.history_file     = "CHANGELOG.rdoc"
-  p.readme_file      = "README.rdoc"
-  p.extra_rdoc_files = [p.readme_file]
-  p.need_tar         = false
-  p.test_globs       = %w(test/**/*_test.rb)
-  p.testlib          = :minitest
-
-  p.extra_deps << "dnssd"
+  extra_deps << "dnssd"
 end

@@ -1,3 +1,11 @@
-=== 1.0.0 (2009-02-27)
+=== 1.2.0 / 2009-06-22
+
+* Update docs.
+* Standardize project structure.
+* Switch to correct MiniTest.
+* Switch to new Hoe.
+* Improve the command-line tool.
+
+=== 1.0.0 / 2009-02-27
 
 * Birthday!

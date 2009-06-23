@@ -1,26 +1,31 @@
 = Pastejour
 
-Broadcast standard out using Bonjour.
+* http://github.com/jbarnette/pastejour
+
+== Description
+
+Broadcast standard out using Bonjour. Pipe output to other people.
+Pastejour is like pbcopy, but over the network!
 
 == Examples
 
-  alice$ git diff | pastejour
-  bob$ pastejour alice
-  
-  alice$ git diff | pastejour bob
-  bob$ pastejour
-  
-  alice$ git diff | pastejour monkeys
-  bob$ pastejour alice-monkeys
-  
-  alice$ git diff | pastejour monkeys
-  bob$ pastejour -f
-  Searching for servers (3 seconds)
-  alice-monkeys
-  
-  # Copy the clipboard contents from one machine to another
-  alice$ pbpaste | pastejour bob
-  bob$ pastejour | pbcopy
+    alice$ git diff | pastejour
+    bob$ pastejour alice
+
+    alice$ git diff | pastejour bob
+    bob$ pastejour
+
+    alice$ git diff | pastejour monkeys
+    bob$ pastejour alice-monkeys
+
+    alice$ git diff | pastejour monkeys
+    bob$ pastejour -f
+    Searching for servers (3 seconds)
+    alice-monkeys
+
+    # Copy the clipboard contents from one machine to another
+    alice$ pbpaste | pastejour bob
+    bob$ pastejour | pbcopy
 
 == ORLY?
 
@@ -29,15 +34,19 @@ and out. By default, Pastejour will only stay up until the first
 person grabs your paste. If you want to let a bunch of people grab the
 same thing, shoot it out in multiple mode:
 
-  alice$ git diff | pastejour -m # keeps on serving 'til you CTRL-C
-  
+    alice$ git diff | pastejour -m # keeps on serving 'til you CTRL-C
+
 == Awesome!
 
 You know it.
 
 == Installation
 
-    $ sudo gem install pastejour
+    $ gem install pastejour
+
+== TODO
+
+* Stop using dnssd, it's Mac OS X only.
 
 == License
 

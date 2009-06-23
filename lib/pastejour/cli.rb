@@ -1,6 +1,5 @@
 require "optparse"
 require "pastejour"
-require "pastejour/version"
 
 module Pastejour
   class Cli
@@ -53,6 +52,10 @@ module Pastejour
 
     def multiple?
       @multiple
+    end
+
+    def run?
+      @run
     end
 
     def tee?

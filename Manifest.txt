@@ -5,5 +5,4 @@ Rakefile
 bin/pastejour
 lib/pastejour.rb
 lib/pastejour/cli.rb
-lib/pastejour/version.rb
-test/pastejour/cli_test.rb
+test/test_cli.rb

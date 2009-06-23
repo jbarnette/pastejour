@@ -1,6 +1,5 @@
-require "minitest/unit"
+require "minitest/autorun"
 require "pastejour/cli"
-require "pastejour/version"
 
 module Pastejour
   class CliTest < MiniTest::Unit::TestCase

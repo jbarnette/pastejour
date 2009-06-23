@@ -1,4 +1,3 @@
-require "rubygems"
 require "dnssd"
 require "set"
 require "socket"
@@ -7,6 +6,8 @@ require "webrick"
 Thread.abort_on_exception = true
 
 module Pastejour
+  VERSION = "1.2.0"
+
   include Socket::Constants
 
   Paste   = Struct.new(:name, :host, :port)
@@ -18,12 +19,15 @@ module Pastejour
     service = DNSSD.browse(SERVICE) do |reply|
       servers[reply.name] ||= reply
     end
+
     STDERR.puts "Searching for servers (3 seconds)"
+
     # Wait for something to happen
     sleep 3
+
     service.stop
-    servers.each { |string,obj| 
-      name, port = string.split ":" 
+    servers.each { |string,obj|
+      name, port = string.split ":"
       STDERR.puts "Found pastejour at '#{name}'"
     }
   end
@@ -59,7 +63,6 @@ module Pastejour
         STDERR.puts "  #{host.name} (#{host.host}:#{host.port})"
       end
     else
-      # Set is weird. There is no #[] or #at
       hosts.each do |host|
         STDERR.puts "(#{host.name} from #{host.host}:#{host.port})"
         sock = TCPSocket.open host.host, host.port
@@ -71,7 +74,7 @@ module Pastejour
   def self.serve(name, multiple, contents)
     tr = DNSSD::TextRecord.new
     tr["description"] = "A paste."
-    
+
     DNSSD.register(name, SERVICE, "local", PORT, tr.encode) do |reply|
       STDERR.puts "Pasting #{name}..."
     end
