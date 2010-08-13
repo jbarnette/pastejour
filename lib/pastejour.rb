@@ -75,7 +75,7 @@ module Pastejour
     tr = DNSSD::TextRecord.new
     tr["description"] = "A paste."
 
-    DNSSD.register(name, SERVICE, "local", PORT, tr.encode) do |reply|
+    DNSSD.register(name, SERVICE, "local", PORT, tr) do |reply|
       STDERR.puts "Pasting #{name}..."
     end
 
