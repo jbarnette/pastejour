@@ -50,7 +50,7 @@ You know it.
 
 == License
 
-Copyright 2008 - 2009 John Barnette (jbarnette@rubyforge.org), Evan
+Copyright 2008 - 2010 John Barnette (code@jbarnette.com), Evan
 Phoenix (evan@fallingsnow.net)
 
 Permission is hereby granted, free of charge, to any person obtaining

@@ -6,7 +6,7 @@ require "webrick"
 Thread.abort_on_exception = true
 
 module Pastejour
-  VERSION = "1.2.0"
+  VERSION = "1.2.1"
 
   include Socket::Constants
 

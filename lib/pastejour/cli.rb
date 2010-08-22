@@ -13,8 +13,6 @@ module Pastejour
       @verbose  = false
 
       OptionParser.new do |opts|
-        opts.separator ""
-
         opts.on "--list", "-l", "List available pastes." do
           @list = true
         end
@@ -37,7 +35,6 @@ module Pastejour
           @run = false
         end
 
-        opts.separator ""
         opts.parse! args
 
         @name = args.shift

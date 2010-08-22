@@ -1,5 +1,6 @@
 require "minitest/autorun"
 require "pastejour/cli"
+require "stringio"
 
 module Pastejour
   class CliTest < MiniTest::Unit::TestCase

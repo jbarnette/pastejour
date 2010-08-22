@@ -1,10 +1,11 @@
 require "rubygems"
 require "hoe"
 
-Hoe.plugin :git
+Hoe.plugins.delete :rubyforge
+Hoe.plugin :doofus, :git
 
 Hoe.spec "pastejour" do
-  developer "John Barnette", "jbarnette@rubyforge.org"
+  developer "John Barnette", "code@jbarnette.com"
   developer "Evan Phoenix",  "evan@fallingsnow.net"
 
   self.extra_rdoc_files = FileList["*.rdoc"]
@@ -12,5 +13,5 @@ Hoe.spec "pastejour" do
   self.readme_file      = "README.rdoc"
   self.testlib          = :minitest
 
-  extra_deps << "dnssd"
+  extra_deps << ["dnssd", ">= 1.3.1"]
 end
